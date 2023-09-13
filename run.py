@@ -4,11 +4,25 @@ from classes.BDO_API import BDO_API
 
 Log('Set log level', 0).setLevel(1)
 
-# response = API().post("https://eu-trade.naeu.playblackdesert.com/Trademarket/GetWorldMarketWaitList")
 bdo = BDO_API()
-#response = bdo.GetWorldMarketSearchList([10286,10210])
-# response = bdo.GetWorldMarketWaitList()
-# response = bdo.GetWorldMarketSubList(10286)
-#response = bdo.GetWorldMarketList(1)
-response = bdo.GetWorldMarketHotList()
+
+# response = bdo.GetMarketHotList()
+# response = bdo.GetMarketQueueList()
+# response = bdo.GetMarketList(1, 1)
+response = bdo.GetMarketItem(56221)
+# response = bdo.GetMarketItem(10210, 2)
+# response = bdo.GetMarketItemIcon(10210)
+# response = bdo.GetMarketItemTooltip(10210, 2)
+# response = bdo.GetMarketSearch('Narc')
+
+
 print(response)
+
+# FUTURE
+# embed = discord.Embed(title="my title",color=**discord.Color.purple()**)
+# embed.set_thumbnail(url="")
+# embed.add_field(name="", value="", inline=True)
+# embed.set_footer(text="by squirrhell")
+
+# pouvoir ajouter/supp/voir
+#

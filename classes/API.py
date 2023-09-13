@@ -9,17 +9,21 @@ class API :
     def __call__(self) :
         None
 
-    def get(self, url) :
-        response = requests.get(url)
+    def get(self, url, param={}, json=False) :
+        response = requests.get(url, params=param)
         if self.check_status_code(response.status_code) :
-            return response.json()
+            if json :
+                return response.json()
+            return response
         else :
             return response.status_code
         
-    def post(self, url, param={}) :
+    def post(self, url, param={}, json=False) :
         response = requests.post(url, params=param)
         if self.check_status_code(response.status_code) :
-            return response.json()
+            if json :
+                return response.json()
+            return response
         else :
             return response.status_code
 
@@ -28,22 +32,22 @@ class API :
             case 200 :
                 return True
             case 301 :
-                Log("301 - The server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint name is changed.", 3)
+                Log("301 - Moved Permanently", 3)
                 return False
             case 400 :
-                Log("400 - The server thinks you made a bad request. This can happen when you don’t send along the right data, among other things.", 3)
+                Log("400 - Bad Request", 3)
                 return False
             case 401 :
-                Log("401 - The server thinks you’re not authenticated. Many APIs require login ccredentials, so this happens when you don’t send the right credentials to access an API.", 3)
+                Log("401 - Unauthorized", 3)
                 return False
             case 403 :
-                Log("403 - The resource you’re trying to access is forbidden: you don’t have the right perlessons to see it.", 3)
+                Log("403 - Forbidden", 3)
                 return False
             case 404 :
-                Log("404 - The resource you tried to access wasn’t found on the server.", 3)
+                Log("404 - Not Found", 3)
                 return False
             case 503 :
-                Log("503 - The server is not ready to handle the request.", 3)
+                Log("503 - Service Unavailable", 3)
                 return False
             case _ :
                 # Default
